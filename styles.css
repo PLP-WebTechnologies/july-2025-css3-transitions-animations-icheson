@@ -1,0 +1,76 @@
+/* ---------- RESET ---------- */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+
+:root{
+  --primary:#4e54c8;
+  --secondary:#8f94fb;
+  --bg:#f5f5f5;
+  --radius:8px;
+}
+
+body{background:var(--bg);color:#333;line-height:1.6;padding-bottom:2rem;}
+
+header{background:var(--primary);color:#fff;padding:1rem 2rem;position:sticky;top:0;z-index:10;}
+nav{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem;}
+nav button{background:none;border:none;color:#fff;padding:.5rem 1rem;border-radius:var(--radius);cursor:pointer;transition:background .3s;}
+nav button:hover, nav button.active{background:var(--secondary);}
+
+main{max-width:900px;margin:2rem auto;padding:0 1rem;}
+section.tab{display:none;}
+section.tab.active{display:block;}
+
+/* ---------- PART 1 – CSS ANIMATIONS ---------- */
+.btn{
+  background:var(--primary);color:#fff;border:none;padding:.8rem 1.4rem;border-radius:var(--radius);cursor:pointer;
+  transition:transform .3s, background .3s;
+}
+.btn:hover{transform:translateY(-2px) scale(1.05);background:var(--secondary);}
+
+/* Continuous pulse on box */
+.box{
+  width:100px;height:100px;background:var(--secondary);margin:1rem 0;border-radius:var(--radius);
+  transition:transform 1s, opacity 1s;
+}
+.box.animate{transform:translateX(200px) rotate(360deg);opacity:.4;}
+
+/* Card flip */
+.card-container{display:flex;justify-content:center;margin:1rem 0;}
+.card{
+  width:150px;height:200px;perspective:600px;cursor:pointer;
+}
+.card-inner{
+  position:relative;width:100%;height:100%;transition:transform .8s;transform-style:preserve-3d;
+}
+.card.flipped .card-inner{transform:rotateY(180deg);}
+.card-front,.card-back{
+  position:absolute;top:0;left:0;width:100%;height:100%;backface-visibility:hidden;
+  border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;
+}
+.card-front{background:var(--primary);}
+.card-back{background:#ff6b6b;transform:rotateY(180deg);}
+
+/* Loader */
+.loader{
+  border:5px solid #ccc;border-top:5px solid var(--primary);border-radius:50%;
+  width:40px;height:40px;animation:spin 1s linear infinite;margin:1rem 0;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hidden{display:none;}
+
+/* Modal */
+.modal-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+  transition:opacity .4s;
+}
+.modal-overlay.show{opacity:1;pointer-events:auto;}
+.modal{
+  background:#fff;padding:2rem;border-radius:var(--radius);max-width:400px;
+  transform:translateY(-40px);transition:transform .4s;
+}
+.modal-overlay.show .modal{transform:translateY(0);}
+
+/* form */
+form{display:flex;flex-direction:gap:1rem;max-width:400px;}
+label{display:flex;flex-direction:column;margin-bottom:1rem;}
+input,textarea{padding:.6rem;border:1px solid #ccc;border-radius:var(--radius);}
